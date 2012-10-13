@@ -1,8 +1,12 @@
 DtimeRumble::Application.routes.draw do
+  get "dashboard" => "groups#index", as: "dashboard"
+
+  resources :groups
+
   get "/login" => "sessions#login"
 
   get "/logout" => "sessions#logout"
-
+  get "/confirm" => "sessions#confirm", as: "confirming"
   post "/login" => "sessions#register"
 
   # The priority is based upon order of creation:
@@ -54,7 +58,7 @@ DtimeRumble::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'sessions#login'
+  root :to => 'groups#index'
 
   # See how all your routes lay out with "rake routes"
 

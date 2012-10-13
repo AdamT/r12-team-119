@@ -1,31 +1,38 @@
 class SessionsController < ApplicationController
   def login
-    if params[:token] && user = User.find_by_token(params[:token])
-      session[:user_token] = user.token
-      redirect_to root_path, notice: "Welcome back, #{user.name}!"
+    if params[:token] && user = User.confirm_login(params[:token])
+      set_token_for(user)
+      redirect_to root_path
+    elsif logged_in?
+      redirect_to root_path
     else
+      flash.now[:notice] = "That token seems to have expired" if params[:token]
       render :login
     end
   end
 
   def logout
-    session[:user_token] = nil
+    set_token_for(nil)
     redirect_to root_path, notice: 'You have been logged out'
   end
 
   def register
     if user = User.find_by_email(params[:user][:email])
-      # TODO: Already exists, send token to email
-      Notifications.login(user).deliver!
+      Notifications.login(user).deliver
       redirect_to root_path, notice: "Please check your email for a login token."
     else
+      params[:user][:name] = "Random Person" unless params[:user][:name]
       user = User.new(params[:user])
       if user.save
-        raise user.inspect
+        Notifications.confirm(user).deliver
+        redirect_to confirming_path, notice: "Confirmation email sent"
       else
-        raise "failed"
+        redirect_to login_path, error: "Looks like something went wrong. Sorry about that!"
       end
     end
+  end
+
+  def confirm
   end
 
 end

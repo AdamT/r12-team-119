@@ -1,0 +1,11 @@
+h1 Welcome to freetime, #{@user.name}!
+
+p
+  ' Almost ready to go - we just wanted to make sure you're you. Click this
+    link to confirm your identity.
+  == link_to login_url(token: @user.login_token), login_url(token: @user.login_token)
+
+p
+  ' Are you not you, or maybe just not expecting this email? Ignore it and
+    we'll try not to bother you again.
+

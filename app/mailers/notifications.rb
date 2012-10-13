@@ -17,4 +17,9 @@ class Notifications < ActionMailer::Base
 
     mail to: user.email
   end
+  def confirm(user)
+    @user = user
+
+    mail to: user.email
+  end
 end
