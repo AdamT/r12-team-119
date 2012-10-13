@@ -3,7 +3,6 @@ html
   head
     title DtimeRumble
     = stylesheet_link_tag    "application"
-    = javascript_include_tag "application"
     = csrf_meta_tags
 body
   = debug params
@@ -11,4 +10,5 @@ body
   - if flash[:notice]
     .notice= flash[:notice]
   == yield
+  = javascript_include_tag "application"
 

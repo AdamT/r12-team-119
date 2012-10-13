@@ -7,6 +7,7 @@ gem 'rails'
 
 gem 'sqlite3'
 gem "slim-rails"
+gem "rails-backbone"
 
 
 gem "letter_opener", :group => :development
