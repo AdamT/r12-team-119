@@ -22,7 +22,7 @@ gem 'jquery-rails'
 # gem 'unicorn'
 
 # Deploy with Capistrano
-# gem 'capistrano'
+gem 'capistrano'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
@@ -30,4 +30,9 @@ gem 'jquery-rails'
 group :test do
   # Pretty printed test output
   gem 'turn', :require => false
+end
+
+group :production do
+  gem 'mysql2' # If using mysql in development, this can be outside the production group.
+  gem 'therubyracer'
 end
