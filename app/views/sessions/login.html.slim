@@ -24,7 +24,7 @@ table.calendar
   - minutes = 15
   - ((60*24)/minutes).times do |i|
     tr(data-minutes="#{i*minutes}")
-      td= i*minutes
+      th= i*minutes
       td: input(type="checkbox")
       td: input(type="checkbox")
       td: input(type="checkbox")
