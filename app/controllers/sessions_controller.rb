@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def login
     if params[:token] && user = User.find_by_token(params[:token])
-      session[:user_id] = user.id
+      session[:user_token] = user.token
       redirect_to root_path, notice: "Welcome back, #{user.name}!"
     else
       render :login
@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    session[:user_id] = nil
+    session[:user_token] = nil
     redirect_to root_path, notice: 'You have been logged out'
   end
 
