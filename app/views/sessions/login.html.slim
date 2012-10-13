@@ -17,25 +17,14 @@ br
 hr
 br
 .calendar
+  - @timecard = Timecard.new
   table class="table table-striped table-bordered table-hover table-condensed"
     tr
       th
-      th Monday
-      th Tuesday
-      th Wednesday
-      th Thursday
-      th Friday
-      th Saturday
-      th Sunday
-    - minutes = 15
-    - ((60*24)/minutes).times do |i|
-      - time = DateTime.new(2017,1,1,(i*minutes/60),(i*minutes%60))
-      tr(data-minutes="#{i*minutes}")
-        th= time.strftime("%H:%M")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
+      - @timecard.each_day do |day|
+        th= day.date.strftime("%A")
+    - @timecard.each_slice do |slice|
+      tr(data-slot="#{slice.slot_offset}")
+        th= slice.date.strftime("%H:%M")
+        - slice.each_slot.each_with_index do |slot, i|
+          td: input(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]")
