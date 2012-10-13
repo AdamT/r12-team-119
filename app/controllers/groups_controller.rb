@@ -1,5 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :authorize_user!, except: :show
+  before_filter :finding_group, except: [:index, :create]
   def index
     @group_list = current_user.groups
     @own_group_list = current_user.own_groups
@@ -23,19 +24,22 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    g = Group.find_by_slug(params[:id])
-
-    if g
-      if current_user.id == g.user_id && g.destroy
-        redirect_to dashboard_path, notice: "Removed"
-      else
-        redirect_to dashboard_path, error: "Couldn't delete the group (you probably didn't create it)"
-      end
+    if current_user.id == @group.user_id && @group.destroy
+      redirect_to dashboard_path, notice: "Removed"
     else
-      redirect_to dashboard_path, error: "Couldn't find that."
+      redirect_to dashboard_path, error: "Couldn't delete the group (you probably didn't create it)"
     end
   end
 
   def update
+  end
+
+  def finding_group
+    @group = Group.find_by_slug(params[:id])
+
+    unless @group
+      redirect_to dashboard_path, error: "Couldn't find that."
+    end
+
   end
 end
