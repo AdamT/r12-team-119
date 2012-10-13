@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
   def register
     if user = User.find_by_email(params[:user][:email])
       Notifications.login(user).deliver
-      redirect_to root_path, notice: "Please check your email for a login token."
+      redirect_to waiting_path, notice: "Please check your email for a login token."
     else
       params[:user][:name] = "Random Person" unless params[:user][:name]
       user = User.new(params[:user])
@@ -33,6 +33,8 @@ class SessionsController < ApplicationController
   end
 
   def confirm
+  end
+  def waiting
   end
 
 end

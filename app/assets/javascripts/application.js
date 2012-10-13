@@ -11,4 +11,4 @@
 //= require backbone_rails_sync
 //= require backbone_datalink
 //= require backbone/dtime_rumble
-//= require_tree .
+//= require_tree ./app

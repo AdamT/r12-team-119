@@ -7,6 +7,7 @@ DtimeRumble::Application.routes.draw do
 
   get "/logout" => "sessions#logout"
   get "/confirm" => "sessions#confirm", as: "confirming"
+  get "/waiting" => "sessions#waiting", as: "waiting"
   post "/login" => "sessions#register"
 
   # The priority is based upon order of creation:
