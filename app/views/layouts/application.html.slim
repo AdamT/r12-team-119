@@ -8,6 +8,8 @@ html
 body
   header
     - if logged_in?
+      .back
+        a href="/dashboard" Home
       .user
         .avatar
           img(src=current_user.gravatar alt=current_user.name)

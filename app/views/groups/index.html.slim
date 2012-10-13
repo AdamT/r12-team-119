@@ -1,2 +1,13 @@
-h1 Groups#index
-p Find me in app/views/groups/index.html.slim
+.row
+  h1 Groups#index
+  p Find me in app/views/groups/index.html.slim
+
+  - @own_group_list.each do |g|
+    .group
+      a(href=group_path(g))= g.title
+      = button_to("Remove", group_path(g), method: :delete)
+  - @group_list.each do |g|
+    .group
+      a(href=group_path(g))= g.title
+
+  = button_to("Create", groups_path)
