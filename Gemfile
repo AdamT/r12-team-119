@@ -9,7 +9,6 @@ gem 'sqlite3'
 gem "slim-rails"
 gem "rails-backbone"
 
-
 gem "letter_opener", :group => :development
 
 # Gems used only for assets and not required
@@ -37,6 +36,6 @@ group :test do
 end
 
 group :production do
-  gem 'mysql2' # If using mysql in development, this can be outside the production group.
+#  gem 'mysql2' # If using mysql in development, this can be outside the production group.
   gem 'therubyracer'
 end
