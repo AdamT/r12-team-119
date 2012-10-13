@@ -20,7 +20,7 @@ class Timecard
 
   def each_slice
     slots_per_day.times.map do |i|
-      days.map{|d| d[i] }
+      Slice.new(slot_offset: i, days: days, start: start, slot_size: slot_size)
     end
   end
 
