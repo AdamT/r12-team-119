@@ -1,9 +1,9 @@
 class Intersection
+  LENGTH       = 12
+  MIN_DURATION = 3
   def demo_method
     users = Hash.new
 
-    LENGTH       = 12
-    MIN_DURATION = 3
 
     users["adam"]  = "1111110111110"
     users["jason"] = "1111111100010"
