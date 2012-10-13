@@ -44,5 +44,12 @@ module DtimeRumble
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+    config.action_mailer.smtp_settings = {
+      :address   => "smtp.mandrillapp.com",
+      :port      => 25,
+      :user_name => 'therabidbanana@gmail.com',
+      :password  => '7e9ada49-e74c-44cd-a0af-9c321e373b46'
+    }
+
   end
 end

@@ -1,0 +1,8 @@
+h1 Sessions#login
+p Find me in app/views/sessions/login.html.slim
+= debug params
+
+= form_tag :action => "login" do
+  = email_field_tag 'user[email]'
+  = text_field_tag 'user[name]'
+  = submit_tag("Login")
