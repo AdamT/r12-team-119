@@ -5,7 +5,7 @@ class Day
     @slot_count = options[:slots] || 96
     # The day offset
     @offset = options[:offset] || 0
-    @start = options[:start] || Time.now.to_date
+    @start = options[:start] || Time.now.to_datetime
     setup_slots
   end
 

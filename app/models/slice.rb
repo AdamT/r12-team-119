@@ -1,23 +1,29 @@
 class Slice
-  attr_reader :slot_count, :start, :slots
+  attr_reader :slot_count, :start, :days, :slot_offset
   def initialize(options = {})
     # Slots for the slice
-    @slots = options[:slots] || []
+    @days = options[:days] || []
     @slot_size = options[:slot_size] || 15
     @slot_offset = options[:slot_offset] || 0
-    @start = options[:start] || Time.now.to_date
+    @start = options[:start] || Time.now.to_datetime
   end
 
-  def setup_slots
-    @slots = Array.new(@slot_count, false)
+  # TODO: Implement so we can convert time represented by slice
+  # to a string
+  def date
+    start
+  end
+
+  def minutes
+    date.min
+  end
+
+  def hours
+    date.hour
   end
 
   def each_slot
-    slots.each
-  end
-
-  def serialize
-    each_slot.map{|s| s ? "1":"0" }.join
+    days.map{|day| day[slot_offset] }
   end
 
 end

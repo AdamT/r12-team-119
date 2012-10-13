@@ -5,7 +5,7 @@ class Timecard
     @slot_size = options[:slot_size] || 15
     # Time slot length is number of days
     @days = options[:days] || 7
-    @start = options[:start] || Time.now.to_date
+    @start = options[:start] || Time.now.to_datetime
     setup_days
   end
 
