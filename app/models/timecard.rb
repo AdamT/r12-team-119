@@ -38,4 +38,29 @@ class Timecard
   def serialize
     each_day.map{|s| s.serialize }.join
   end
+
+  def deserialize(serialized)
+    raise "Can't deserialize!" unless serialized.length == @days * slots_per_day
+    each_day {|d| d.deserialize(serialized.slice(d.offset * slots_per_day, slots_per_day))}
+  end
+
+  def fill_with(params)
+    params.each do |day, slots|
+      slots.each do |slot_num, bool|
+        @day_list[day.to_i].slots[slot_num.to_i] = bool
+      end
+    end
+
+    self
+  end
+
+  def maskable?(other_timecard)
+    @start == other_timecard.start && @days == other_timecard.days && other_timecard.slot_size % @slot_size == 0
+  end
+
+  def mask_with(other_timecard)
+    raise "Timecard mismatch!" unless maskable?(other_timecard)
+    # assuming slot_sizes are equal for now
+    deserialize((self.serialize.to_i(2) & other_timecard.serialize.to_i(2)).to_s(2).rjust(@days * slots_per_day, "0"))
+  end
 end

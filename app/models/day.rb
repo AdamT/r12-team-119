@@ -29,4 +29,7 @@ class Day
     each_slot.map{|s| s ? "1":"0" }.join
   end
 
+  def deserialize(serialized)
+    @slots = serialized.split("").map {|c| c == "1"}
+  end
 end
