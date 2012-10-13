@@ -7,8 +7,9 @@ html
 body
   = debug params
   = debug session
-  - if flash[:notice]
-    .notice= flash[:notice]
-  == yield
-  = javascript_include_tag "application"
+  .container
+    - if flash[:notice]
+      .notice= flash[:notice]
+    == yield
+    = javascript_include_tag "application"
 

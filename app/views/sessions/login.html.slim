@@ -1,16 +1,21 @@
-h1 Sessions#login
-p Find me in app/views/sessions/login.html.slim
-
+br
 #login
-  = form_tag :action => "login" do
-    .gravatar
-      .img
-    .email
-      = email_field_tag 'user[email]', '', placeholder: 'your email'
-    .hidden.name
-      = text_field_tag 'user[name]', '', placeholder: 'your name'
-    = submit_tag("Login")
+.row
+  =form_tag({:action => "login"}, {:class => "form-vertical span5 offset2"}) do
+    =field_set_tag "Welcome" do
+      .control-group
+        .controls
+          .gravatar
+            .img
+          .email
+            = email_field_tag 'user[email]', '', placeholder: 'your email', class: "input-large"
+          .hidden.name
+            = text_field_tag 'user[name]', '', placeholder: 'your name'
+          .form-actions
+            = submit_tag("Login", class: "btn btn-primary")
 
+hr
+br
 .calendar
   table
     tr
