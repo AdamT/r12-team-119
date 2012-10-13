@@ -22,8 +22,9 @@ class Slice
     date.hour
   end
 
-  def each_slot
-    days.map{|day| day[slot_offset] }
+  def each_slot(&block)
+    slots = days.map{|day| day[slot_offset] }
+    slots.each(&block)
   end
 
 end

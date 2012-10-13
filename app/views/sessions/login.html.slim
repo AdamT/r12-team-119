@@ -23,13 +23,7 @@ p Find me in app/views/sessions/login.html.slim
       th Saturday
       th Sunday
     - Timecard.new.each_slice do |slice|
-      = slice.inspect
       tr(data-minutes="#{slice.slot_offset}")
         th= slice.date.strftime("%H:%M")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
-        td: input(type="checkbox")
+        - slice.each_slot.each_with_index do |slot, i|
+          td: input(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]")

@@ -9,6 +9,10 @@ class Day
     setup_slots
   end
 
+  def [](index)
+    @slots[index]
+  end
+
   def setup_slots
     @slots = Array.new(@slot_count, false)
   end
