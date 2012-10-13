@@ -1,0 +1,33 @@
+.calendar{
+  height: 300px;
+  width: 80%;
+  overflow: auto;
+  table{
+    border-collapse: collapse;
+    width: 100%;
+
+    tr{
+      border-top: 1px dotted gray;
+      &:nth-child(4n+4){
+        border-top: 1px solid gray;
+      }
+      &:nth-child(4n+2){
+        border-top: 2px solid black;
+      }
+    }
+
+
+    td{
+      width: 12%;
+      border-left: 1px solid gray;
+      padding: 0;
+      margin: 0;
+    }
+    td input{
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+  }
+}

@@ -11,24 +11,26 @@ p Find me in app/views/sessions/login.html.slim
       = text_field_tag 'user[name]', '', placeholder: 'your name'
     = submit_tag("Login")
 
-table.calendar
-  tr
-    th
-    th Monday
-    th Tuesday
-    th Wednesday
-    th Thursday
-    th Friday
-    th Saturday
-    th Sunday
-  - minutes = 15
-  - ((60*24)/minutes).times do |i|
-    tr(data-minutes="#{i*minutes}")
-      th= i*minutes
-      td: input(type="checkbox")
-      td: input(type="checkbox")
-      td: input(type="checkbox")
-      td: input(type="checkbox")
-      td: input(type="checkbox")
-      td: input(type="checkbox")
-      td: input(type="checkbox")
+.calendar
+  table
+    tr
+      th
+      th Monday
+      th Tuesday
+      th Wednesday
+      th Thursday
+      th Friday
+      th Saturday
+      th Sunday
+    - minutes = 15
+    - ((60*24)/minutes).times do |i|
+      - time = DateTime.new(2017,1,1,(i*minutes/60),(i*minutes%60))
+      tr(data-minutes="#{i*minutes}")
+        th= time.strftime("%H:%M")
+        td: input(type="checkbox")
+        td: input(type="checkbox")
+        td: input(type="checkbox")
+        td: input(type="checkbox")
+        td: input(type="checkbox")
+        td: input(type="checkbox")
+        td: input(type="checkbox")
