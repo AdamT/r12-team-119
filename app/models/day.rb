@@ -21,6 +21,10 @@ class Day
     slots.each
   end
 
+  def date
+    (start.to_date + offset).to_datetime
+  end
+
   def serialize
     each_slot.map{|s| s ? "1":"0" }.join
   end

@@ -12,18 +12,14 @@ p Find me in app/views/sessions/login.html.slim
     = submit_tag("Login")
 
 .calendar
+  - @timecard = Timecard.new
   table
     tr
       th
-      th Monday
-      th Tuesday
-      th Wednesday
-      th Thursday
-      th Friday
-      th Saturday
-      th Sunday
-    - Timecard.new.each_slice do |slice|
-      tr(data-minutes="#{slice.slot_offset}")
+      - @timecard.each_day do |day|
+        th= day.date.strftime("%A")
+    - @timecard.each_slice do |slice|
+      tr(data-slot="#{slice.slot_offset}")
         th= slice.date.strftime("%H:%M")
         - slice.each_slot.each_with_index do |slot, i|
           td: input(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]")
