@@ -21,6 +21,7 @@ Gems
 * Slim-rails
 * Letter-Opener
 * Rails-Backbone
+* Rspec-rails
 
 Jquery libs
 Backbone.js
