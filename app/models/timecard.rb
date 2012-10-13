@@ -5,23 +5,23 @@ class Timecard
     @slot_size = options[:slot_size] || 15
     # Time slot length is number of days
     @days = options[:days] || 7
-    @start = options[:start] || Time.now.to_datetime
+    @start = options[:start] || Time.now.to_date.to_datetime
     setup_days
   end
 
-  def each_slot
+  def each_slot(&block)
     each_day.flat_map do |day|
       day.slots
-    end
+    end.each(&block)
   end
-  def each_day
-    @day_list.each
+  def each_day(&block)
+    @day_list.each(&block)
   end
 
-  def each_slice
-    slots_per_day.times.map do |i|
+  def each_slice(&block)
+    slots = slots_per_day.times.map do |i|
       Slice.new(slot_offset: i, days: days, start: start, slot_size: slot_size)
-    end
+    end.each(&block)
   end
 
   def setup_days
