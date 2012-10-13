@@ -10,3 +10,17 @@ App to find times when everybody is free for something.
 In development mode, we are catching all of the mail with `letter_opener`, which
 means any emails are available in tmp/letter_opener. The directory is mounted as
 /mail in development mode, `rake mail:clear` to empty
+
+
+## Acknowledgements
+
+Gems
+
+* Rails
+* Slim
+* Slim-rails
+* Letter-Opener
+
+Jquery libs
+
+* Handsontable (https://github.com/warpech/jquery-handsontable)

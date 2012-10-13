@@ -1,9 +1,34 @@
 h1 Sessions#login
 p Find me in app/views/sessions/login.html.slim
-= debug params
-= debug session
 
-= form_tag :action => "login" do
-  = email_field_tag 'user[email]'
-  = text_field_tag 'user[name]'
-  = submit_tag("Login")
+#login
+  = form_tag :action => "login" do
+    .gravatar
+      .img
+    .email
+      = email_field_tag 'user[email]', '', placeholder: 'your email'
+    .hidden.name
+      = text_field_tag 'user[name]', '', placeholder: 'your name'
+    = submit_tag("Login")
+
+table.calendar
+  tr
+    th
+    th Monday
+    th Tuesday
+    th Wednesday
+    th Thursday
+    th Friday
+    th Saturday
+    th Sunday
+  - minutes = 15
+  - ((60*24)/minutes).times do |i|
+    tr(data-minutes="#{i*minutes}")
+      td= i*minutes
+      td: input(type="checkbox")
+      td: input(type="checkbox")
+      td: input(type="checkbox")
+      td: input(type="checkbox")
+      td: input(type="checkbox")
+      td: input(type="checkbox")
+      td: input(type="checkbox")
