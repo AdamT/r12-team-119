@@ -11,6 +11,9 @@ class SessionsController < ApplicationController
     end
   end
 
+  def check_email
+  end
+
   def logout
     set_token_for(nil)
     redirect_to root_path, notice: 'You have been logged out'
