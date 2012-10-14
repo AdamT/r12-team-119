@@ -39,7 +39,7 @@ class SessionsController < ApplicationController
       if user.save
         handle_waiting_for(user)
         Notifications.confirm(user).deliver
-        redirect_to confirming_path, notice: "Confirmation email sent."
+        redirect_to waiting_path, notice: "Confirmation email sent."
       else
         redirect_to login_path, error: "Looks like something went wrong. Sorry about that!"
       end
