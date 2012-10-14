@@ -14,6 +14,7 @@ class Group < ActiveRecord::Base
   end
   def owned_by?(user)
     return false unless user
+    return false unless user.id
     user.id == user_id
   end
   def ready?
