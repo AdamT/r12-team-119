@@ -34,10 +34,10 @@ body
       .row
         .span4
         .span4
-          ' made with
-          span(class="redish")
-            '<3
-          |in NYC and SLC
+          .spacer
+            ' made with
+            =image_tag(src="glyphicons/glyphicons_012_heart.png")
+            |   in NYC and SLC
         .span4
   - if Rails.env.development?
     .container.debug
