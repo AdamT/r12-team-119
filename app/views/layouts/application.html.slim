@@ -22,7 +22,6 @@ html(class="#{@on_splash ? "splash" : "normal" }")
           .deets
             p Already a user?
             a href="/login" Login
-
       - if flash[:notice]
         .notice= flash[:notice]
     div(class="#{@on_splash ? 'splash landing' : 'container'}")
@@ -30,8 +29,5 @@ html(class="#{@on_splash ? "splash" : "normal" }")
       = javascript_include_tag "application"
     - if Rails.env.development?
       .container.debug
-        = debug params
-        br
-        = debug session
         br
         = link_to "Sent Mail", "/mail"
