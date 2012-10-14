@@ -5,6 +5,7 @@ html(class="#{@on_splash ? "splash" : "normal" }")
     = stylesheet_link_tag    "application"
     = javascript_include_tag "modernizr"
     = csrf_meta_tags
+    link href='http://fonts.googleapis.com/css?family=Sarina|Sonsie+One' rel='stylesheet' type='text/css'
 body
   header
     - if logged_in?
