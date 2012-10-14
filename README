@@ -29,6 +29,7 @@ Gems
 Jquery libs
 Backbone.js
 modernizr
+md5.js (http://pajhome.org.uk/crypt/md5/md5.html)
 
 
 Considerations

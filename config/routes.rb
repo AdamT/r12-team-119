@@ -13,6 +13,7 @@ DtimeRumble::Application.routes.draw do
   get "/login" => "sessions#login"
 
   get "/logout" => "sessions#logout"
+  get "/check_email" => "sessions#check_email"
   get "/confirm" => "sessions#confirm", as: "confirming"
   get "/waiting" => "sessions#waiting", as: "waiting"
   post "/login" => "sessions#register"
@@ -66,7 +67,7 @@ DtimeRumble::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  root :to => 'groups#index'
+  root :to => 'pages#home'
 
   # See how all your routes lay out with "rake routes"
 

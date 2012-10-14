@@ -27,6 +27,10 @@ class User < ActiveRecord::Base
     self.login_token = SecureRandom.hex(16)
   end
 
+  def email=(e)
+    super(e.downcase)
+  end
+
   def gravatar(size = 80)
     "//www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}?s=#{size}"
   end
