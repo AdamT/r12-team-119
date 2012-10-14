@@ -7,8 +7,12 @@
             img(src="")
           .email
             = email_field_tag 'user[email]', '', placeholder: 'your email', class: "input-xlarge", autofocus: true
+          p.new-here
+            ' Looks like you're new around these parts. What's your name?
           .hidden.name
             = text_field_tag 'user[name]', '', placeholder: 'your name'
+          p.welcome-back
+            ' Welcome back!
           .form-actions
             = submit_tag("Login", class: "btn btn-primary")
 = content_for :javascripts do

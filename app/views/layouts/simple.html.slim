@@ -13,6 +13,3 @@ html(class="simple")
     == yield
     = javascript_include_tag "application"
     == yield :javascripts
-    - if Rails.env.development?
-      .container.debug
-        = link_to "Sent Mail", "/mail"

@@ -3,6 +3,9 @@ require 'securerandom'
 class User < ActiveRecord::Base
   before_create :assign_token
   validates_uniqueness_of :email
+  validates_presence_of :email
+  validates_format_of :email, with: /^.+@.+\..+$/
+
   has_many :own_groups, class_name: "Group"
   has_many :responses, class_name: "GroupParticipant"
   has_many :groups, through: :responses

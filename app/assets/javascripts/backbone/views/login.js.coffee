@@ -1,7 +1,9 @@
 class DtimeRumble.Views.Login extends Backbone.View
   events:
+    'keyup .email input': 'checkEmail'
     'change .email input': 'checkEmail'
-    'keyup .email input': 'setGravatar'
+    'keyup .name input': 'checkName'
+    'change .name input': 'checkName'
 
   initialize: ->
     @$('.form-actions').hide()
@@ -16,16 +18,43 @@ class DtimeRumble.Views.Login extends Backbone.View
     @throttled()
 
   checkEmail: (e)->
-    $.getJSON("/check_email", {email: $(e.currentTarget).val()}).done ()=>
-      #nop
-      @setGravatar()
-      @$('.name').addClass('hidden')
-      @$('.new-here').hide()
-      @$('.form-actions').show()
-      @$('.form-actions input').val('Sign in')
-    .fail ()=>
-      @$('.name.hidden').removeClass('hidden')
-      @$('.new-here').show()
-      @$('.form-actions').show()
-      @$('.form-actions input').val('Sign up')
+    @setGravatar()
+    @debounce ?= _.debounce ()=>
+      email =  @$('.email input').val()
+      if email != '' && email.match(/.+@.+/)
+        $.getJSON("/check_email", {email:email}).done ()=>
+          @$('.name').addClass('hidden').hide()
+          @$('.new-here').hide()
+          @$('.form-actions').hide()
+          @$('.welcome-back').fadeIn()
+          @$('.form-actions input').val('Sign in').removeClass('disabled').attr('disabled', false)
+          @$('.form-actions').fadeIn().done ()->
+            @$('.form-actions input').focus()
+        .fail ()=>
+            @$('.name.hidden').removeClass('hidden').hide().fadeIn()
+            @$('.new-here').fadeIn()
+            @$('.form-actions').fadeIn()
+            @$('.welcome-back').hide()
+            @$('.form-actions input').val('Sign up').addClass('disabled').attr('disabled', true)
+      else
+        @$('.name').addClass('hidden').hide()
+        @$('.new-here').hide()
+        @$('.form-actions').hide()
+        @$('.welcome-back').hide()
+        @$('.form-actions input').val('Sign in').addClass('disabled').attr('disabled', true)
+        @$('.form-actions').fadeOut()
+    , 100
+    @debounce()
+    true
 
+  checkName: ()->
+    @debounceName ?= _.debounce ()=>
+      if @$('.name').is(":hidden")
+        @$('.form-actions input').val('Sign in').removeClass('disabled').attr('disabled', false)
+      else if @$(".name input").val() != ''
+        @$('.form-actions input').removeClass('disabled').attr('disabled', false)
+      else
+        @$('.form-actions input').addClass('disabled').attr('disabled', true)
+
+    , 200
+    @debounceName()
