@@ -22,6 +22,9 @@ Gems
 * Letter-Opener
 * Rails-Backbone
 * Rspec-rails
+* Compass
+* Compass-rails
+* Compass-rgbapng
 
 Jquery libs
 Backbone.js
