@@ -10,4 +10,5 @@
     .group
       a(href=group_path(g))= g.title
 
-  = button_to("Create", groups_path)
+.row
+  = render partial: 'form'

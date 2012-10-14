@@ -1,0 +1,20 @@
+= form_for(Group.new) do |f|
+  label
+    ' Event Name
+    br
+    = f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
+  label
+    ' Starting Week
+    br
+    = date_select :group, :start_date, :default => (Date.today + 7)
+  label
+    ' How specific?
+    br
+    = f.select :slot_size, [["5 minute blocks", 5], ["15 minute blocks", 15], ["30 minute blocks", 30], ["60 minute blocks", 60]]
+  label
+    ' Range
+    br
+    = f.select :days, [["7 days", 7], ["14 days", 14]]
+
+
+  = f.submit "Save Changes", class: 'btn btn-primary'

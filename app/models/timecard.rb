@@ -13,6 +13,10 @@ class Timecard
     @day_list[day][slot]
   end
 
+  def clone_blank
+    self.class.new(slot_size: slot_size, days: days, start: start)
+  end
+
   def each_slot(&block)
     each_day.flat_map do |day|
       day.slots
@@ -33,6 +37,10 @@ class Timecard
       days.times.map do |d|
         Day.new(start: start, offset: d, slots: slots_per_day)
       end
+  end
+
+  def date
+    start.to_datetime
   end
 
   def slots_per_day

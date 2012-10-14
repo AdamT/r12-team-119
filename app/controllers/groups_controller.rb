@@ -11,7 +11,7 @@ class GroupsController < ApplicationController
   def show
     if logged_in?
       unless @me = current_user.responses.detect{|r| r.group_id == @group.id}
-        @me = GroupParticipant.new(group: @group_id)
+        @me = GroupParticipant.new(group_id: @group.id)
       end
       @timecard = @me.timecard
     else
@@ -32,7 +32,7 @@ class GroupsController < ApplicationController
   def set_user
     if logged_in?
       unless @me = current_user.responses.detect{|r| r.group_id == @group.id}
-        @me = GroupParticipant.new(group_id: @group_id)
+        @me = GroupParticipant.new(group_id: @group.id)
       end
       @me.fill_timecard_with(params[:slots])
       current_user.responses << @me
@@ -54,14 +54,16 @@ class GroupsController < ApplicationController
 
   def create
     if logged_in?
-      g = Group.create(:user_id => current_user.id)
+      params[:group]["user_id"] = current_user.id
+      g = Group.create(params[:group])
     else
-      g = Group.create()
+      g = Group.create(params[:group])
       session[:group_waiting] = g.id
     end
-    if g
+    if g.valid?
       redirect_to edit_group_path(g)
     else
+      raise g.errors.inspect
       redirect_to dashboard_path, error: "Couldn't create the group for some reason"
     end
   end
