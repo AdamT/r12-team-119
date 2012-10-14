@@ -29,7 +29,14 @@ span.freetime-blue{
 
 .selling-points{
   margin-top: 30px;
+  padding: 3em 0;
   background-color: #fff;
+   -webkit-box-shadow:0px -1px 3px rgba(0,0,20,0.3);
+  box-shadow:0px -1px 3px rgba(0,0,20,0.3);
+  clear: both;
+  margin-top: 2em;
+  border-top: 6px solid #2FA4E7;
+
 }
 
 .selling-points h3 {
