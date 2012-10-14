@@ -36,6 +36,9 @@
 
 
 
+      &.masked td.valid{
+        border: 1px solid blue;
+      }
 
       td.highlighted{
         html.touch &{

@@ -51,6 +51,9 @@ class Timecard
   def fill_with(params)
     params.each do |day, slots|
       slots.each do |slot_num, bool|
+        if bool.is_a?(String)
+          bool = (bool == "true")
+        end
         @day_list[day.to_i].slots[slot_num.to_i] = bool
       end
     end

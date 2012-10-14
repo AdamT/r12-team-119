@@ -5,7 +5,7 @@
         th
         - timecard.each_day do |day|
           th= day.date.strftime("%A")
-    tbody
+    tbody(class="#{masking_timecard ? "masked" : ''}")
       - timecard.each_slice do |slice|
         tr(data-slot="#{slice.slot_offset}")
           th
@@ -13,7 +13,8 @@
           - slice.each_slot.each_with_index do |slot, i|
             - day = (slice.date.to_date + i)
             - valid = (!masking_timecard || masking_timecard.fetch(i, slice.slot_offset))
-            td(class="day_#{day.wday} #{valid ? "valid": ""}")
+            - highlighted = slice.fetch(i)
+            td(class="day_#{day.wday} #{valid ? "valid": ""} #{highlighted ? "highlighted" : ""}")
               input(type="hidden" name="slots[#{i}][#{slice.slot_offset}]" value="false")
               - if valid
-                input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true")
+                input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true" checked=highlighted)

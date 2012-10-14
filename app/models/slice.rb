@@ -25,4 +25,8 @@ class Slice
     slots.each(&block)
   end
 
+  def fetch(day)
+    days[day][slot_offset]
+  end
+
 end
