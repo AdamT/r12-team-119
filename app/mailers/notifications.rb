@@ -1,5 +1,5 @@
 class Notifications < ActionMailer::Base
-  default from: "paddy@dtime.r12.railsrumble.com"
+  default from: "david@dtime.com"
   if Rails.env.development?
     default_url_options[:host] = 'localhost:3000'
   else
