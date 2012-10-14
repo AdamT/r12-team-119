@@ -6,7 +6,7 @@
   label
     ' Week Of
     br
-    = f.text_field :title, placeholder: Date.today, class: "date_picker", id: "datepicker"
+    = f.text_field :start_date, value: Date.today + 7, class: "date_picker"
   label.slot_size
     ' How specific?
     br
