@@ -8,4 +8,4 @@ hr
     = f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
   = f.submit "Save Changes", class: 'btn btn-primary'
   br
-  = render partial: 'timecard'
+  = render partial: 'timecard', locals: {timecard: @group.timecard, masking_timecard: nil}

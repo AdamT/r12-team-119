@@ -15,29 +15,33 @@ class DtimeRumble.Views.Calendar extends Backbone.View
   initialize: ->
     @isMouseDown = false
     @isHighlighted = false
+    @$('input.check:checked').each (i)->
+      $(i).closest("td").addClass("highlighted")
+
+
     $(document).mouseup ()=>
       @isMouseDown = false
 
   touchstart: (e)->
     target = $(e.touches)
     @isMouseDown = true
-    if target.is("td")
+    if target.is("td:has(input.check)")
       target.toggleClass("highlighted")
       @isHighlighted = target.hasClass("highlighted")
     else
       @isHighlighted = true
-    $('input', target).attr("checked", @isHighlighted)
+    $('input.check', target).attr("checked", @isHighlighted)
     # return false # prevent text selection
 
   start: (e)->
     target = $(e.target)
     @isMouseDown = true
-    if target.is("td")
+    if target.is("td:has(input.check)")
       target.toggleClass("highlighted")
       @isHighlighted = target.hasClass("highlighted")
     else
       @isHighlighted = true
-    $('input', target).attr("checked", @isHighlighted)
+    $('input.check', target).attr("checked", @isHighlighted)
     return false # prevent text selection
 
   stop: ->
@@ -45,12 +49,11 @@ class DtimeRumble.Views.Calendar extends Backbone.View
 
   highlight: (e)->
     target = $(e.target)
-    if @isMouseDown  && target.is("td")
-      $(target).toggleClass("highlighted", @isHighlighted)
-      $('input', target).attr("checked", @isHighlighted)
+    if @isMouseDown  && target.is("td:has(input.check)")
+      target.toggleClass("highlighted", @isHighlighted)
+      $('input.check', target).attr("checked", @isHighlighted)
   touchhighlight: (e)->
-    alert 'hi'
     target = $(e.touches).filter("td")
-    if @isMouseDown  && target.is("td")
-      $(target).toggleClass("highlighted", @isHighlighted)
-      $('input', target).attr("checked", @isHighlighted)
+    if @isMouseDown  && target.is("td:has(input.check)")
+      target.toggleClass("highlighted", @isHighlighted)
+      $('input.check', target).attr("checked", @isHighlighted)

@@ -40,6 +40,8 @@ class GroupsController < ApplicationController
       redirect_to group_path(@group)
     else
       @group.update_attributes(params[:group])
+      @group.fill_timecard_with(params[:slots])
+      @group.save
       redirect_to group_path(@group), notice: "Saved Changes"
     end
   end

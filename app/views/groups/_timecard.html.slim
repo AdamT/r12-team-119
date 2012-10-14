@@ -1,17 +1,19 @@
 .calendar
-  - @timecard = Timecard.new
   table class="table table-striped table-bordered table-hover table-condensed"
     thead
       tr
         th
-        - @timecard.each_day do |day|
+        - timecard.each_day do |day|
           th= day.date.strftime("%A")
     tbody
-      - @timecard.each_slice do |slice|
+      - timecard.each_slice do |slice|
         tr(data-slot="#{slice.slot_offset}")
           th
             strong= slice.date.strftime("%H:%M")
           - slice.each_slot.each_with_index do |slot, i|
             - day = (slice.date.to_date + i)
-            td(class="day_#{day.wday}")
-              input(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]")
+            - valid = (!masking_timecard || masking_timecard.fetch(i, slice.slot_offset))
+            td(class="day_#{day.wday} #{valid ? "valid": ""}")
+              input(type="hidden" name="slots[#{i}][#{slice.slot_offset}]" value="false")
+              - if valid
+                input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true")

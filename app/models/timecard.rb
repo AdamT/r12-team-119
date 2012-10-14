@@ -9,6 +9,10 @@ class Timecard
     setup_days
   end
 
+  def fetch(day, slot)
+    @day_list[day][slot]
+  end
+
   def each_slot(&block)
     each_day.flat_map do |day|
       day.slots

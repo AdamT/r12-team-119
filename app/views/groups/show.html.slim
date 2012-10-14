@@ -4,4 +4,4 @@ p Find me in app/views/groups/show.html.slim
 - if @group.user_id == current_user.id
   a.btn.btn-primary(href=edit_group_path(@group)) Edit
 
-= render partial: 'timecard'
+= render partial: 'timecard', locals: {masking_timecard: @group.timecard, timecard: Timecard.new}

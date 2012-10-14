@@ -12,4 +12,19 @@ class Group < ActiveRecord::Base
   def to_param
     slug
   end
+
+  def fill_timecard_with(params)
+    timecard.fill_with(params)
+    self.serialized_timecard = timecard.serialize
+  end
+  def timecard
+    return @timecard if @timecard
+    @timecard = Timecard.new
+    @timecard.deserialize(serialized_timecard) if self.serialized_timecard
+    @timecard
+  end
+  def timecard=(card)
+    self.serialized_timecard = card.serialize
+    @timecard = card
+  end
 end
