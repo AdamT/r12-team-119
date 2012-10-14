@@ -2,11 +2,21 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.view-group{
+.view-group, .edit-group{
   a.edit, .form-actions input{
+    float: right;
+  }
+  .name-change{
     float: right;
   }
   .form-actions p{
     float: left;
   }
+}
+
+.dashboard{
+  .form-actions a, .form-actions input{
+    float: right;
+  }
+
 }
