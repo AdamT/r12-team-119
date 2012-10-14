@@ -17,7 +17,7 @@
             ' Free time
           |you can:
       h3 Go on, get started
-      =form_tag("/stuff") do
+      =form_tag(controller: "sessions", action: "login") do
         br
         =text_field_tag("Name", nil, placeholder: "Enter group name")
         .form-actions
@@ -49,5 +49,3 @@
         h3 4. Confirm
         p Hard hard part, which wasn't that hard, is over. Now just send everyone a notification of when you're going to meet.
 
-p Pages#home
-p Find me in app/views/pages/home.html.slim
