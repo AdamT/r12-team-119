@@ -1,0 +1,17 @@
+doctype html
+html(class="simple")
+  head
+    title DtimeRumble
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "modernizr"
+    = csrf_meta_tags
+    link href='http://fonts.googleapis.com/css?family=Sarina|Sonsie+One' rel='stylesheet' type='text/css'
+  body
+    header
+      - if flash[:notice]
+        .notice= flash[:notice]
+    == yield
+    = javascript_include_tag "application"
+    - if Rails.env.development?
+      .container.debug
+        = link_to "Sent Mail", "/mail"

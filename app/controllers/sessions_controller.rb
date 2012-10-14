@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  layout 'simple'
   def login
     if params[:token] && user = User.confirm_login(params[:token])
       set_token_for(user)
