@@ -17,6 +17,11 @@ class Group < ActiveRecord::Base
     self.slug = SecureRandom.urlsafe_base64(12)
   end
 
+  def min_duration
+    # TODO make group attribute... if slot_size is 15 and they are only interesteed in minimum 1 hour intersections, this would be 4
+    4
+  end
+
   def valid_group_participants
     self.group_participants.select{|u| u.user && u.user.ready? }
   end
@@ -46,5 +51,28 @@ class Group < ActiveRecord::Base
   def timecard=(card)
     self.serialized_timecard = card.serialize
     @timecard = card
+  end
+
+  def best_timeslots
+    results = []
+
+    group_participants.size.downto(2) do |n|
+      group_participants.combination(n).to_a.each do |subgroup|
+        intersection = subgroup.inject(timecard.serialize.to_i(2)) do |x, participant|
+          x &= participant.timecard.serialize.to_i(2)
+        end.to_s(2)
+
+        intersection.gsub!(/(?:^|0)(1{1,#{min_duration-1}})(?:0|$)/, "0" * '\1'.length)
+        intersection = intersection.rjust(timecard.days * timecard.slots_per_day, "0") if intersection
+
+        if intersection =~ /1{#{min_duration}}/
+          results << timecard.clone_blank.deserialize(intersection)
+        end
+      end
+
+      break if results.present?
+    end
+
+    results
   end
 end
