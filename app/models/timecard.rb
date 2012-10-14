@@ -17,6 +17,22 @@ class Timecard
     self.class.new(slot_size: slot_size, days: days, start: start)
   end
 
+  def build_group_card(cards_set = {})
+    each_day.each_with_index do |day, d|
+      each_slot.each_with_index do |s, i|
+        next unless s
+        cards_set.each do |user, card|
+          if card.fetch(d, i)
+            day[i] = [] unless day[i].respond_to?(:<<)
+            day[i] << user if user
+          end
+        end
+        day[i] = true if day[i].blank?
+      end
+    end
+    self
+  end
+
   def each_slot(&block)
     each_day.flat_map do |day|
       day.slots
@@ -27,9 +43,13 @@ class Timecard
   end
 
   def each_slice(&block)
+    slices.each(&block)
+  end
+
+  def slices
     slots = slots_per_day.times.map do |i|
       Slice.new(slot_offset: i, days: @day_list, start: start, slot_size: slot_size)
-    end.each(&block)
+    end
   end
 
   def setup_days

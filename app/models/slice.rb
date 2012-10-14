@@ -21,8 +21,11 @@ class Slice
   end
 
   def each_slot(&block)
-    slots = days.map{|day| day[slot_offset] }
     slots.each(&block)
+  end
+
+  def slots
+    days.map{|day| day[slot_offset] }
   end
 
   def fetch(day)
