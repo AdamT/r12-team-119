@@ -9,6 +9,10 @@ class GroupsController < ApplicationController
   end
 
   def show
+    unless @me = current_user.responses.detect{|r| r.group_id == @group.id}
+      @me = GroupParticipant.new(group: @group_id)
+    end
+    @timecard = @me.timecard
   end
 
   def edit
@@ -16,6 +20,19 @@ class GroupsController < ApplicationController
       redirect_to group_path(@group)
     else
     end
+  end
+
+  def set_user
+    unless @me = current_user.responses.detect{|r| r.group_id == @group.id}
+      @me = GroupParticipant.new(group_id: @group_id)
+    end
+    @me.fill_timecard_with(params[:slots])
+    current_user.responses << @me
+    @group.group_participants << @me
+    current_user.save
+    @group.save
+    @me.save
+    redirect_to group_path(@group), notice: "Saved Changes"
   end
 
   def create
@@ -41,6 +58,10 @@ class GroupsController < ApplicationController
     else
       @group.update_attributes(params[:group])
       @group.fill_timecard_with(params[:slots])
+      @group.group_participants.each do |p|
+        p.mask_timecard_with(@group.timecard)
+        p.save
+      end
       @group.save
       redirect_to group_path(@group), notice: "Saved Changes"
     end
