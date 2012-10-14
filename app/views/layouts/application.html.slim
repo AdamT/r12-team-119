@@ -25,6 +25,16 @@ body
   div(class="#{@on_splash ? 'splash landing' : 'container'}")
     == yield
     = javascript_include_tag "application"
+  footer
+    .container
+      .row
+        .span4
+        .span4
+          ' made with
+          span(class="redish")
+            '<3
+          |in NYC and SLC
+        .span4
   - if Rails.env.development?
     .container.debug
       = debug params
