@@ -1,5 +1,6 @@
 .edit-group
   = form_for(@group, class: 'group cal') do |f|
+    a.edit.btn.btn-link(href=group_path(@group)) Cancel
     label.name-change
       ' Change Event Name:
       = f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
