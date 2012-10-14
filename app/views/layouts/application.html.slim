@@ -7,10 +7,12 @@ html(class="#{@on_splash ? "splash" : "normal" }")
     = csrf_meta_tags
     link href='http://fonts.googleapis.com/css?family=Sarina|Sonsie+One' rel='stylesheet' type='text/css'
 body
-  header
+  header.main_header
+    .rrumble-brand.sarina
+      a href="/dashboard" Free time
+    .helper-logo
+      |Finding a time to meet just got easierish!
     - if logged_in?
-      .back
-        a href="/dashboard" Home
       .user
         .avatar
           img(src=current_user.gravatar alt=current_user.display_name)
