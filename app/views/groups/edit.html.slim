@@ -5,7 +5,7 @@
       = f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
     h1= (@group.title.blank? ? "New Group" : @group.title)
     .form-actions
-      p Select valid times for the event
+      p Select valid times for your event
       = submit_tag("Save", class: "btn btn-primary disabled")
     br
     = render partial: 'timecard', locals: {timecard: @group.timecard, masking_timecard: nil}
