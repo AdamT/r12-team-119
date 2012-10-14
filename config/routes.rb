@@ -1,4 +1,7 @@
 DtimeRumble::Application.routes.draw do
+  get "pages/home"
+  match "/home" => "pages#home"
+
   get "dashboard" => "groups#index", as: "dashboard"
 
   resources :groups do

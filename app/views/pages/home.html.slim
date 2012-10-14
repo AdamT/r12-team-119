@@ -1,0 +1,44 @@
+.container
+  .rrumble-brand.sarina
+    |Free time
+  .helper-logo
+    |Finding a time to meet just got easierish!
+  .row-fluid
+    .span8
+      img(src="http://placehold.it/300x270" alt="")
+      img(src="http://placehold.it/300x270" alt="")
+      img(src="http://placehold.it/300x270" alt="")
+      img(src="http://placehold.it/300x270" alt="")
+    .span4.pxspacer20
+      div
+        p
+          span(class="freetime-blue")
+            |Free time
+          |, let's you and your team/friends coordinate your available time.
+        p
+          'With
+          span(class="freetime-blue")
+            ' Free time
+          |you can:
+      h3 Go on, get started 
+      =form_tag("/stuff") do
+        br
+        =text_field_tag("Name", nil, placeholder: "Enter group name")
+        .form-actions
+          =submit_tag("Submit", class: 'btn btn-primary')
+  .row-fluid.selling-points
+    .span3
+      h3 1. Choose
+      p View all available times and choose what times work best for you.
+    .span3
+      h3 2. Share
+      p Once you select your times, Free time adds your preferences to the calendar for the group to see.
+    .span3
+      h3 3. Decide
+      p When your group is done choosing what times they prefer, you can make a clear decision on the time that works best for everyone.
+    .span3
+      h3 4. Confirm
+      p Hard hard part, which wasn't that hard, is over. Now just send everyone a notification of when you're going to meet.
+
+p Pages#home
+p Find me in app/views/pages/home.html.slim

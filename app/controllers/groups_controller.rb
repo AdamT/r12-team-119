@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_filter :authorize_user!, only: [:index, :destroy]
-  before_filter :finding_group, except: [:index, :create]
+  before_filter :finding_group, except: [:index, :create, :new]
   def index
     @group_list = current_user.groups
     @own_group_list = current_user.own_groups
@@ -8,6 +8,8 @@ class GroupsController < ApplicationController
     @own_group_list.select!{|g| g.ready?  }
   end
 
+  def new
+  end
   def show
     @group_timecard = build_group_timecard
     if logged_in?
