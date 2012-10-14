@@ -12,6 +12,13 @@ class Group < ActiveRecord::Base
   def to_param
     slug
   end
+  def owned_by?(user)
+    return false unless user
+    user.id == user_id
+  end
+  def ready?
+    !(title.blank? || user_id.blank?)
+  end
 
   def fill_timecard_with(params)
     timecard.fill_with(params)
