@@ -31,6 +31,33 @@ body {
 }
 
 header{
+  margin: 0 auto;
+  width: 940px;
+
+  .rrumble-brand{
+    color: #2FA4E7;
+    background: -webkit-linear-gradient(#2FA4E7, #46AEEA);
+      -webkit-background-clip: text;
+    font-size: 3.5em;
+    padding-left:10px;
+    padding-top: 30px;
+    text-shadow: 3px 3px 1px rgba(0,0,0,0.3);
+
+    a:hover, a:active {
+      color: #3FB4F7;
+      text-decoration: none;
+    }
+  }
+
+  .helper-logo{
+    color: #ddd;
+    padding-left:15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    text-shadow: 2px 2px 1px rgba(0,0,0,0.5);
+  }
+
   .notice{
     @include border-radius(8px);
     @include rgba-background(rgba(255, 255, 255, .5));
@@ -40,16 +67,16 @@ header{
     padding: 10px;
     width: 940px;
   }
-  .back{
-    position: absolute;
-    top: 1em;
-    left: 2em;
-  }
+
   .user{
+    background-color: #224;
+    background-color: rgba(20,20,40, 0.8);
+    color: white;
     position: absolute;
-    top: 0;
     right: 2em;
+    top: 0;
     width: 300px;
+
     .avatar{
       float: right;
       width: 40px;
@@ -60,12 +87,10 @@ header{
         border: 1px solid #bbb;
       }
     }
+
     .deets{
       padding: 1em 2em 1em;
     }
-    color: white;
-    background-color: #224;
-    background-color: rgba(20,20,40, 0.8);
   }
 }
 .normal .container{
