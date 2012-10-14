@@ -6,7 +6,7 @@ html
     = javascript_include_tag "modernizr"
     = csrf_meta_tags
 body
-  header
+  header.main_header
     - if logged_in?
       .back
         a href="/dashboard" Home
