@@ -12,6 +12,10 @@ class GroupsController < ApplicationController
   end
 
   def edit
+    if current_user.id != @group.user_id
+      redirect_to group_path(@group)
+    else
+    end
   end
 
   def create
@@ -32,6 +36,12 @@ class GroupsController < ApplicationController
   end
 
   def update
+    if current_user.id != @group.user_id
+      redirect_to group_path(@group)
+    else
+      @group.update_attributes(params[:group])
+      redirect_to group_path(@group), notice: "Saved Changes"
+    end
   end
 
   def finding_group

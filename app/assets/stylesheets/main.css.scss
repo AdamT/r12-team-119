@@ -1,15 +1,26 @@
 .calendar{
   width: 80%;
+  height: 700px;
+  overflow: auto;
 
   overflow: auto;
-  table.table-striped{
+  table.table-striped.table-bordered{
     width: 100%;
 
     tbody{
       tr th{
-        font-size: small;
+        font-size: x-small;
         vertical-align: super;
-        padding-bottom: 10px;
+        text-align: center;
+        font-weight: normal;
+        padding-top: 0px;
+        padding-bottom: 36px;
+        position: relative;
+        strong{
+          margin-top: -10px;
+          position: absolute;
+          display: inline-block;
+        }
       }
 
       tr{
@@ -18,6 +29,7 @@
           border-top: 1px solid gray;
         }
         &:nth-child(4n+2){
+          border-top: 2px solid black;
           border-top: 2px solid black;
         }
       }
@@ -29,7 +41,10 @@
         html.touch &{
           background: blue;
         }
-        background: red;
+        background: rgba(100,100,155,0.25);
+      }
+      .day_6,.day_0{
+        background: rgba(0,0,0,0.11);
       }
 
       td{

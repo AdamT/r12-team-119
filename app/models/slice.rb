@@ -1,5 +1,5 @@
 class Slice
-  attr_reader :slot_count, :start, :days, :slot_offset
+  attr_reader :slot_count, :start, :days, :slot_offset, :slot_size
   def initialize(options = {})
     # Slots for the slice
     @days = options[:days] || []
@@ -8,10 +8,8 @@ class Slice
     @start = options[:start] || Time.now.to_datetime
   end
 
-  # TODO: Implement so we can convert time represented by slice
-  # to a string
   def date
-    start
+    (@start.to_date.to_time + (60 * slot_size * slot_offset)).to_datetime
   end
 
   def minutes

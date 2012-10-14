@@ -1,7 +1,3 @@
-h1 Groups#new
-p Find me in app/views/groups/edit.html.slim
-hr
-br
 .calendar
   - @timecard = Timecard.new
   table class="table table-striped table-bordered table-hover table-condensed"
@@ -13,6 +9,9 @@ br
     tbody
       - @timecard.each_slice do |slice|
         tr(data-slot="#{slice.slot_offset}")
-          th= slice.date.strftime("%H:%M")
+          th
+            strong= slice.date.strftime("%H:%M")
           - slice.each_slot.each_with_index do |slot, i|
-            td: input(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]")
+            - day = (slice.date.to_date + i)
+            td(class="day_#{day.wday}")
+              input(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]")

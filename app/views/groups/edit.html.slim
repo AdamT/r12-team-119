@@ -2,17 +2,10 @@ h1 Groups#edit
 p Find me in app/views/groups/edit.html.slim
 hr
 = form_for(@group) do |f|
-  = f.text_field :title
+  label
+    ' Event Name
+    br
+    = f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
+  = f.submit "Save Changes", class: 'btn btn-primary'
   br
-  .calendar
-    - @timecard = Timecard.new
-    table class="table table-striped table-bordered table-hover table-condensed"
-      tr
-        th
-        - @timecard.each_day do |day|
-          th= day.date.strftime("%A")
-      - @timecard.each_slice do |slice|
-        tr(data-slot="#{slice.slot_offset}")
-          th= slice.date.strftime("%H:%M")
-          - slice.each_slot.each_with_index do |slot, i|
-            td: input(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]")
+  = render partial: 'timecard'
