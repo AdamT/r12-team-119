@@ -10,11 +10,11 @@
   label
     ' How specific?
     br
-    = f.select :slot_size, [["5 minute blocks", 5], ["15 minute blocks", 15], ["30 minute blocks", 30], ["60 minute blocks", 60]]
-  label
-    ' Range
-    br
-    = f.select :days, [["7 days", 7], ["14 days", 14]]
+    = f.select :slot_size, [ ["15 minute blocks", 15], ["30 minute blocks", 30], ["60 minute blocks", 60]]
+  / label
+    / ' Range
+    / br
+    / = f.select :days, [["7 days", 7], ["14 days", 14]]
 
 
   = f.submit "Save Changes", class: 'btn btn-primary'

@@ -24,4 +24,5 @@
                   - unless x == 0
                     input(type="hidden" name="slots[#{i}][#{slice.slot_offset}]" value="false")
                     - if valid
+                      = render partial: 'facepile', locals: {group_slot: group_slot}
                       input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true" checked=highlighted)

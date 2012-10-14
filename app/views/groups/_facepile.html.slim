@@ -1,0 +1,6 @@
+- limit = 3
+- if group_slot.respond_to?(:each)
+  - group_slot.take(limit).each do |g|
+    img(src=g.gravatar(20) alt=g.name)
+  - if (size = (group_slot.length - limit)) > 0
+    span +#{size} #{(size > 1 ? "others" : "other")}

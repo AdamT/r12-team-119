@@ -20,14 +20,13 @@ class SessionsController < ApplicationController
     if user = User.find_by_email(params[:user][:email])
       handle_waiting_for(user)
       Notifications.login(user).deliver
-      redirect_to waiting_path, notice: "Please check your email for a login token."
+      redirect_to waiting_path
     else
-      params[:user][:name] = "Random Person" unless params[:user][:name]
       user = User.new(params[:user])
       if user.save
         handle_waiting_for(user)
         Notifications.confirm(user).deliver
-        redirect_to confirming_path, notice: "Confirmation email sent"
+        redirect_to confirming_path, notice: "Confirmation email sent."
       else
         redirect_to login_path, error: "Looks like something went wrong. Sorry about that!"
       end
