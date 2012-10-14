@@ -1,11 +1,11 @@
-h1 Groups#edit
-p Find me in app/views/groups/edit.html.slim
-hr
-= form_for(@group, class: 'group cal') do |f|
-  label
-    ' Event Name
+.edit-group
+  = form_for(@group, class: 'group cal') do |f|
+    label.name-change
+      ' Change Event Name:
+      = f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
+    h1= (@group.title.blank? ? "New Group" : @group.title)
+    .form-actions
+      p Select valid times for the event
+      = submit_tag("Save", class: "btn btn-primary disabled")
     br
-    = f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
-  = f.submit "Save Changes", class: 'btn btn-primary'
-  br
-  = render partial: 'timecard', locals: {timecard: @group.timecard, masking_timecard: nil}
+    = render partial: 'timecard', locals: {timecard: @group.timecard, masking_timecard: nil}
