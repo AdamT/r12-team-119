@@ -13,7 +13,7 @@ class GroupParticipant < ActiveRecord::Base
   end
   def timecard
     return @timecard if @timecard
-    @timecard = Timecard.new
+    @timecard = self.group.timecard.clone_blank
     @timecard.deserialize(serialized_timecard) if self.serialized_timecard
     @timecard
   end
