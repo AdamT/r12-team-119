@@ -1,20 +1,24 @@
 .calendar
-  table class="table table-striped table-bordered table-hover table-condensed"
-    thead
-      tr
-        th
-        - timecard.each_day do |day|
-          th= day.date.strftime("%A")
-    tbody(class="#{masking_timecard ? "masked" : ''}")
-      - timecard.each_slice do |slice|
-        tr(data-slot="#{slice.slot_offset}")
-          th
-            strong= slice.date.strftime("%H:%M")
-          - slice.each_slot.each_with_index do |slot, i|
-            - day = (slice.date.to_date + i)
-            - valid = (!masking_timecard || masking_timecard.fetch(i, slice.slot_offset))
-            - highlighted = slice.fetch(i)
-            td(class="day_#{day.wday} #{valid ? "valid": ""} #{highlighted ? "highlighted" : ""}")
-              input(type="hidden" name="slots[#{i}][#{slice.slot_offset}]" value="false")
-              - if valid
-                input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true" checked=highlighted)
+  - 2.times do |x|
+    .table_wrapper
+      table
+        thead
+          tr
+            th
+            - timecard.each_day do |day|
+              th= day.date.strftime("%A")
+        tbody(class="#{masking_timecard ? "masked" : ''}")
+          - timecard.each_slice do |slice|
+            tr(data-slot="#{slice.slot_offset}")
+              th
+                strong= slice.date.strftime("%H:%M")
+              - slice.each_slot.each_with_index do |slot, i|
+                - day = (slice.date.to_date + i)
+                - valid = (!masking_timecard || masking_timecard.fetch(i, slice.slot_offset))
+                - valid = false if x == 0
+                - highlighted = slice.fetch(i)
+                td(class="day_#{day.wday} #{valid ? "valid": ""} #{highlighted ? "highlighted" : ""}")
+                  - unless x == 0
+                    input(type="hidden" name="slots[#{i}][#{slice.slot_offset}]" value="false")
+                    - if valid
+                      input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true" checked=highlighted)
