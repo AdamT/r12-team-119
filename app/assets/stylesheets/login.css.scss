@@ -1,0 +1,27 @@
+html.simple{
+  height: 100%;
+  width: 100%;
+  body {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+
+#login, #wait{
+
+  form, .box{
+    background: white;
+    // Hide form actions
+    .js & .form-actions{
+      display: none;
+    }
+    margin: 5em auto;
+    float: none;
+    padding: 1.5em;
+
+  }
+  width: 100%;
+
+
+}

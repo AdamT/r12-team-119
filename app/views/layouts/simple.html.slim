@@ -12,6 +12,7 @@ html(class="simple")
         .notice= flash[:notice]
     == yield
     = javascript_include_tag "application"
+    == yield :javascripts
     - if Rails.env.development?
       .container.debug
         = link_to "Sent Mail", "/mail"

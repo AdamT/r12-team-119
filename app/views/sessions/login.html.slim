@@ -4,11 +4,13 @@
       .control-group
         .controls
           .gravatar
-            .img
+            img(src="")
           .email
-            = email_field_tag 'user[email]', '', placeholder: 'your email', class: "input-xlarge"
+            = email_field_tag 'user[email]', '', placeholder: 'your email', class: "input-xlarge", autofocus: true
           .hidden.name
             = text_field_tag 'user[name]', '', placeholder: 'your name'
           .form-actions
             = submit_tag("Login", class: "btn btn-primary")
-
+= content_for :javascripts do
+  javascript:
+    new DtimeRumble.Views.Login({el: $('#login')})

@@ -13,6 +13,7 @@ DtimeRumble::Application.routes.draw do
   get "/login" => "sessions#login"
 
   get "/logout" => "sessions#logout"
+  get "/check_email" => "sessions#check_email"
   get "/confirm" => "sessions#confirm", as: "confirming"
   get "/waiting" => "sessions#waiting", as: "waiting"
   post "/login" => "sessions#register"

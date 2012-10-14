@@ -13,6 +13,11 @@ class SessionsController < ApplicationController
   end
 
   def check_email
+    if user = User.find_by_email(params[:email])
+      render :json => {}
+    else
+      render :json => {}, :status => :not_found
+    end
   end
 
   def logout
