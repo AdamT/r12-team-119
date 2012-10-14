@@ -33,13 +33,13 @@ class SessionsController < ApplicationController
     if user = User.find_by_email(params[:user][:email])
       handle_waiting_for(user)
       Notifications.login(user).deliver
-      redirect_to waiting_path
+      redirect_to root_path, notice: "We're sending an email to confirm your identity. Please check your email account for the confirmation link."
     else
       user = User.new(params[:user])
       if user.save
         handle_waiting_for(user)
         Notifications.confirm(user).deliver
-        redirect_to waiting_path, notice: "Confirmation email sent."
+        redirect_to root_path, notice: "We're sending an email to confirm your identity. Please check your email account for the confirmation link."
       else
         redirect_to login_path, error: "Looks like something went wrong. Sorry about that!"
       end

@@ -1,6 +1,7 @@
 .view-group
+  a.edit.btn.btn-success(href="mailto:?subject=When+would+be+a+good+time+for+#{@group.title.gsub(" ", "+")}&body=Let+me+know+at+#{CGI.escape(group_url(@group))}") Share
   - if @group.owned_by?(current_user)
-    a.edit.btn.btn-secondary(href=edit_group_path(@group)) Edit
+    a.edit.btn.btn-link(href=edit_group_path(@group)) Edit
 
   h1= @group.title
   - if @group.valid_group_participants.size > 0

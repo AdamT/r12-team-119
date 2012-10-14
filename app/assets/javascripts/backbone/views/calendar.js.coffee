@@ -9,7 +9,7 @@ class DtimeRumble.Views.Calendar extends Backbone.View
   initialize: ->
     @isMouseDown = false
     @isHighlighted = false
-    @$('td input').css(display: "none")
+    # @$('td input').css(display: "none")
     @$('input.check').each (i)->
       $(i).closest("td").removeClass("highlighted")
     @$('input.check').filter(":checked").each (i)->
