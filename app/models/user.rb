@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
   has_many :own_groups, class_name: "Group"
   has_many :responses, class_name: "GroupParticipant"
   has_many :groups, through: :responses
+
+  def display_name
+    if name.blank?
+      "New user"
+    else
+      name
+    end
+  end
   def assign_token
     self.assign_new_login_token
     self.token = SecureRandom.base64(24)
