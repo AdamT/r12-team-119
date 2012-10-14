@@ -10,6 +10,7 @@ class DtimeRumble.Views.Calendar extends Backbone.View
       {
         'mouseover td': 'highlight'
         'mousedown tr': 'start'
+        'mousedown img': 'start'
         'change input.check': 'highlightThis'
         'mouseup': 'stop'
       }
@@ -32,7 +33,7 @@ class DtimeRumble.Views.Calendar extends Backbone.View
     # return false # prevent text selection
 
   start: (e)->
-    target = $(e.target)
+    target = $(e.target).closest("td")
     @do_touch(target, true)
     return false # prevent text selection
 

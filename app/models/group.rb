@@ -16,6 +16,10 @@ class Group < ActiveRecord::Base
     self.days = 7 if self.days.blank?
     self.slug = SecureRandom.urlsafe_base64(12)
   end
+
+  def valid_group_participants
+    self.group_participants.select{|u| u.user && u.user.ready? }
+  end
   def to_param
     slug
   end

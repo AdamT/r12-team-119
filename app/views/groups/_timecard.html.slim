@@ -22,6 +22,7 @@
                 - grouped = group_slot.is_a?(Array)
                 td(class="day_#{day.wday} #{grouped ? "grouped" : ""} #{valid ? "valid": ""} #{highlighted ? "highlighted" : ""}")
                   - unless x == 0
+                    = render partial: 'facepile', locals: {group_slot: group_slot}
                     input(type="hidden" name="slots[#{i}][#{slice.slot_offset}]" value="false")
                     - if valid
                       input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true" checked=highlighted)

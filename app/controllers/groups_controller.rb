@@ -10,9 +10,9 @@ class GroupsController < ApplicationController
 
   def show
 
-    cards = @group.group_participants
+    cards = @group.valid_group_participants
     cards = cards.reject{|u| u.user_id == current_user.id} if logged_in?
-    cards_list = cards.each_with_object({}){|c, hash| hash[c.user_id] = c.timecard }
+    cards_list = cards.each_with_object({}){|c, hash| hash[c.user] = c.timecard }
     @group_timecard = @group.timecard.build_group_card(cards_list)
     if logged_in?
       unless @me = current_user.responses.detect{|r| r.group_id == @group.id}
@@ -47,7 +47,7 @@ class GroupsController < ApplicationController
       @me.save
       redirect_to group_path(@group), notice: "Saved Changes"
     else
-      @me = GroupParticipant.new(group_id: @group_id)
+      @me = GroupParticipant.new(group_id: @group.id)
       @me.fill_timecard_with(params[:slots])
       @group.group_participants << @me
       @group.save

@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
       name
     end
   end
+  def ready?
+    self.confirmed
+  end
+
   def assign_token
     self.assign_new_login_token
     self.token = SecureRandom.base64(24)
@@ -23,8 +27,8 @@ class User < ActiveRecord::Base
     self.login_token = SecureRandom.hex(16)
   end
 
-  def gravatar
-    "//www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}"
+  def gravatar(size = 80)
+    "//www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.downcase)}?s=#{size}"
   end
 
   def self.confirm_login(token)
