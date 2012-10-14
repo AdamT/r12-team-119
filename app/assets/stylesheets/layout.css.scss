@@ -61,11 +61,12 @@ header{
   .notice{
     @include border-radius(8px);
     @include rgba-background(rgba(255, 255, 255, .5));
+    margin: 1.5em auto;
     border: 3px solid #ddd;
     color: #fff;
     margin: 0 auto;
     padding: 10px;
-    width: 940px;
+    width: 800px;
     a{
       color: white;
       text-decoration: underline;
