@@ -9,6 +9,11 @@ class GroupsController < ApplicationController
   end
 
   def show
+
+    cards = @group.group_participants
+    cards = cards.reject{|u| u.user_id == current_user.id} if logged_in?
+    cards_list = cards.each_with_object({}){|c, hash| hash[c.user_id] = c.timecard }
+    @group_timecard = @group.timecard.build_group_card(cards_list)
     if logged_in?
       unless @me = current_user.responses.detect{|r| r.group_id == @group.id}
         @me = GroupParticipant.new(group_id: @group.id)
@@ -63,7 +68,6 @@ class GroupsController < ApplicationController
     if g.valid?
       redirect_to edit_group_path(g)
     else
-      raise g.errors.inspect
       redirect_to dashboard_path, error: "Couldn't create the group for some reason"
     end
   end
