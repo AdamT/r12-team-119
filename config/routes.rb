@@ -1,7 +1,11 @@
 DtimeRumble::Application.routes.draw do
   get "dashboard" => "groups#index", as: "dashboard"
 
-  resources :groups
+  resources :groups do
+    member do
+      post 'set_user'
+    end
+  end
 
   get "/login" => "sessions#login"
 

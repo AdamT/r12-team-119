@@ -27,3 +27,9 @@ Jquery libs
 Backbone.js
 modernizr
 
+
+Considerations
+==============
+
+* You can change a persons responses by knowing their email - we should require confirmation
+  before saving changes to a specific user.

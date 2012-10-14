@@ -8,17 +8,21 @@
             - timecard.each_day do |day|
               th= day.date.strftime("%A")
         tbody(class="#{masking_timecard ? "masked" : ''}")
-          - timecard.each_slice do |slice|
+          - group_slices = @group_timecard.slices
+          - timecard.each_slice.zip(group_slices) do |slice, group_slice|
             tr(data-slot="#{slice.slot_offset}")
               th
                 strong= slice.date.strftime("%H:%M")
-              - slice.each_slot.each_with_index do |slot, i|
+              - slice.each_slot.zip(group_slice.slots).each_with_index do |(slot, group_slot), i|
                 - day = (slice.date.to_date + i)
                 - valid = (!masking_timecard || masking_timecard.fetch(i, slice.slot_offset))
                 - valid = false if x == 0
-                - highlighted = slice.fetch(i)
-                td(class="day_#{day.wday} #{valid ? "valid": ""} #{highlighted ? "highlighted" : ""}")
+                - highlighted = slot
+                / Other users have chosen
+                - grouped = group_slot.is_a?(Array)
+                td(class="day_#{day.wday} #{grouped ? "grouped" : ""} #{valid ? "valid": ""} #{highlighted ? "highlighted" : ""}")
                   - unless x == 0
                     input(type="hidden" name="slots[#{i}][#{slice.slot_offset}]" value="false")
                     - if valid
+                      = render partial: 'facepile', locals: {group_slot: group_slot}
                       input.check(type="checkbox" name="slots[#{i}][#{slice.slot_offset}]" value="true" checked=highlighted)

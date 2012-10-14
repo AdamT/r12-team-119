@@ -1,38 +1,32 @@
 class DtimeRumble.Views.Calendar extends Backbone.View
   events:
-    if $('html').hasClass('touch')
-      {
-        'touchstart': 'touchstart'
-        'touchstop': 'stop'
-        'touchmove': 'touchhighlight'
-      }
-    else
-      {
-        'mouseover td': 'highlight'
-        'mousedown tr': 'start'
-        'change input.check': 'highlightThis'
-        'mouseup': 'stop'
-      }
+    'mouseover td': 'highlight'
+    'mousedown tr': 'start'
+    'mousedown img': 'start'
+    'click tbody tr th': 'click_row'
+    'change input.check': 'highlightThis'
+    'mouseup': 'stop'
   initialize: ->
     @isMouseDown = false
     @isHighlighted = false
-    @$('input.check:checked').each (i)->
+    @$('input.check').each (i)->
+      $(i).closest("td").removeClass("highlighted")
+    @$('input.check').filter(":checked").each (i)->
       $(i).closest("td").addClass("highlighted")
     if(@$('.table_wrapper tbody').hasClass("masked"))
       first = @$('.table_wrapper:last').find('td.valid,td.highlighted').first().position()
       @$('.table_wrapper:last').scrollTop(first.top - 30)
     else
       @$('.table_wrapper:last').scrollTop(1300)
-
     $(document).mouseup _.bind(@stop, @)
+    @$el.data("view", @)
 
-  touchstart: (e)->
-    target = $(e.touches)
-    @do_touch(target, true)
-    # return false # prevent text selection
+  normalize: ()->
+    @$('input.check').attr("checked", false)
+    @$('.highlighted input.check').attr("checked", true)
 
   start: (e)->
-    target = $(e.target)
+    target = $(e.target).closest("td")
     @do_touch(target, true)
     return false # prevent text selection
 
@@ -40,12 +34,19 @@ class DtimeRumble.Views.Calendar extends Backbone.View
     @isMouseDown = false
     @isHighlighted = false
 
+  click_row: (e)->
+    return unless $(e.target).is("th") || $(e.target).parent().is("th")
+    target = $(e.target).closest("tr")
+    checks = target.find("input.check")
+    return unless checks.length > 0
+    is_on = checks.first().is(":checked")
+    if is_on
+      checks.attr("checked", false)
+    else
+      checks.attr("checked", true)
+    checks.change()
   highlight: (e)->
     target = $(e.target)
-    @do_touch(target)
-
-  touchhighlight: (e)->
-    target = $(e.touches).filter("td")
     @do_touch(target)
 
   # Magic to actual handle click/drag events
@@ -54,8 +55,10 @@ class DtimeRumble.Views.Calendar extends Backbone.View
     return unless @isMouseDown
     if target.is("td:has(input.check)")
       if started
-        target.toggleClass("highlighted")
-        @isHighlighted = target.hasClass("highlighted")
+        checked = target.find("input.check").is(":checked")
+        target.find("input.check").attr("checked", !checked) # toggle
+        target.find("input.check").change()
+        @isHighlighted = !checked
     else
       @isHighlighted = true if started
     $('input.check', target).attr("checked", @isHighlighted)

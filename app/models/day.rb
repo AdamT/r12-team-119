@@ -12,13 +12,16 @@ class Day
   def [](index)
     @slots[index]
   end
+  def []=(index, val)
+    @slots[index] = val
+  end
 
   def setup_slots
     @slots = Array.new(@slot_count, false)
   end
 
-  def each_slot
-    slots.each
+  def each_slot(&block)
+    slots.each(&block)
   end
 
   def date

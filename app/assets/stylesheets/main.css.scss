@@ -44,6 +44,12 @@
       // Groups
       td{
         background: white;
+        &.grouped.valid{
+          background: rgba(90,0,20,0.35);
+        }
+        &.highlighted.grouped.valid{
+          background: rgba(80,190,80,0.35);
+        }
         &.highlighted.valid{
           background: rgba(0,190,80,0.35);
         }
@@ -59,6 +65,12 @@
       &.masked{
         td{
           background: rgba(0,0,0,0.05);
+          &.grouped.valid{
+            background: rgba(90,0,20,0.35);
+          }
+          &.highlighted.grouped.valid{
+            background: rgba(180,0,60,0.35);
+          }
           &.valid{
             background: rgba(0,190,80,0.05);
           }

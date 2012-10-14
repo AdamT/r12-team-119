@@ -11,11 +11,5 @@
     .group
       a(href=group_path(g))= g.title
 
-hr
-  .form-actions
-    = button_to("Create", groups_path, class: "btn btn-large btn-primary span2")
-
-
-|Groups#index
-br
-|Find me in app/views/groups/index.html.slim
+.row
+  = render partial: 'form'

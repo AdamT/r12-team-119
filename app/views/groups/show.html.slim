@@ -1,7 +1,10 @@
 h1 Groups#show
 p Find me in app/views/groups/show.html.slim
 
-- if @group.user_id == current_user.id
+- if @group.owned_by?(current_user)
   a.btn.btn-primary(href=edit_group_path(@group)) Edit
 
-= render partial: 'timecard', locals: {masking_timecard: @group.timecard, timecard: Timecard.new}
+= form_tag(set_user_group_path(@group), method: 'post', class: 'user cal') do
+  = render partial: 'timecard', locals: {masking_timecard: @group.timecard, timecard: @timecard}
+  .form-actions
+    = submit_tag("Save", class: "btn btn-primary")
