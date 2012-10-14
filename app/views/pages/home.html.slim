@@ -1,13 +1,15 @@
-.container-fluid.topmargin5em
+.container.topmargin5em
   .row-fluid
-    .span6
-      img(src="http://placehold.it/360x270" alt="")
-      img(src="http://placehold.it/360x270" alt="")
-      img(src="http://placehold.it/300x200" alt="")
-      img(src="http://placehold.it/420x200" alt="")
-    .span6
+    .span8
+      img(src="http://placehold.it/300x270" alt="")
+      img(src="http://placehold.it/300x270" alt="")
+      img(src="http://placehold.it/300x270" alt="")
+      img(src="http://placehold.it/300x270" alt="")
+    .span4
+      div
+        |So you and your 10 friends want to get together? Sure, just start emailing each other to find the best time. We're sure it'll work out just fine. Go ahead, CC, and BCC your hearts out. Okay, had enough? We thoughts so! Just sign up to AdamsBBQScheduler and find the best time for you and your friends to schedule an event, such as a "Barbique For Adam".
       h1 Get started 
-      =form_tag("/stuff", class: "span5") do
+      =form_tag("/stuff") do
         br
         =text_field_tag("Name", nil, placeholder: "Enter group name")
         br
