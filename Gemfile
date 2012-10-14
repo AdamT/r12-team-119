@@ -15,6 +15,7 @@ gem "letter_opener", :group => :development
 # in production environments by default.
 group :assets do
   gem 'compass-rails'
+  gem 'compass-rgbapng'
   gem 'sass-rails'
   gem 'coffee-rails'
   gem 'uglifier'
