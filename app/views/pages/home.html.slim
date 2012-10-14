@@ -11,11 +11,6 @@
           span(class="freetime-blue")
             |Free time
           |, let's you and your team/friends coordinate your available time.
-        p
-          'With
-          span(class="freetime-blue")
-            ' Free time
-          |you can:
       h3 Go on, get started
       = render partial: 'groups/form'
 .selling-points
@@ -63,7 +58,11 @@
         p
           b
             | Tell the group when to meet
-        p Once the final decision is made, Free time will email all of the event's participants and let them know the final decision.
+        p 
+          | Once the final decision is made, 
+          span(class="freetime-blue")
+            ' Free time
+          | will email all of the event's participants and let them know the final decision.
 
         p There you have it, collaborative scheduling at its bestish!
 
