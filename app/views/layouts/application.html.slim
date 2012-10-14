@@ -1,5 +1,5 @@
 doctype html
-html
+html(class="#{@on_splash ? "splash" : "normal" }")
   head
     title DtimeRumble
     = stylesheet_link_tag    "application"
@@ -19,7 +19,7 @@ body
 
     - if flash[:notice]
       .notice= flash[:notice]
-  .container
+  div(class="#{@on_splash ? 'splash landing' : 'container'}")
     == yield
     = javascript_include_tag "application"
   .container.debug

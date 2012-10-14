@@ -1,0 +1,25 @@
+.container-fluid.topmargin5em
+  .row-fluid
+    .span6
+      img(src="http://placehold.it/360x270" alt="")
+      img(src="http://placehold.it/360x270" alt="")
+      img(src="http://placehold.it/300x200" alt="")
+      img(src="http://placehold.it/420x200" alt="")
+    .span6
+      h1 Get started 
+      =form_tag("/stuff", class: "span5") do
+        br
+        =text_field_tag("Name", nil, placeholder: "Enter group name")
+        br
+        .form-actions
+          =submit_tag("Submit", class: 'btn btn-primary')
+      /= form_for(@group) do |f|
+        /label
+        /' Event Name
+        /br
+        /= f.text_field :title, placeholder: "ex: Adam's Weclome BBQ"
+        /= f.submit "Save Changes", class: 'btn btn-primary'
+  br
+
+p Pages#home
+p Find me in app/views/pages/home.html.slim
