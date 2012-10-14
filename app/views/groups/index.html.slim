@@ -1,15 +1,16 @@
-.row
-  h1 My groups
-  p Please create, select, or remove groups. Go on, give it a try.
-  br
+.dashboard
+  .row
+    h1 My groups
+    p Please create, select, or remove groups. Go on, give it a try.
+    br
 
-  - @own_group_list.each do |g|
-    .group
-      a(href=group_path(g) class="btn btn-success btn-large span5")= g.title
-      = button_to("Remove", group_path(g), method: :delete, class: "btn btn-link btn-large span2", confirm: "Are you sure you want to remove group #{g.title}?")
-  - @group_list.each do |g|
-    .group
-      a(href=group_path(g) class="btn btn-success btn-large span5")= g.title
+    - @own_group_list.each do |g|
+      .group
+        a(href=group_path(g) class="btn btn-success btn-large span5")= g.title
+        = button_to("Remove", group_path(g), method: :delete, class: "btn btn-link btn-large span2", confirm: "Are you sure you want to remove group #{g.title}?")
+    - @group_list.each do |g|
+      .group
+        a(href=group_path(g) class="btn btn-success btn-large span5")= g.title
 
-.row
-  = render partial: 'form'
+  .form-actions
+    = link_to "Create New Event", new_group_path, class: 'btn btn-large btn-primary right'

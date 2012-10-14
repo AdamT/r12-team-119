@@ -1,6 +1,6 @@
 .calendar
   - 2.times do |x|
-    .table_wrapper
+    .table_wrapper(class="#{x > 0 ? "show_body" : "show_head"}")
       table
         thead
           tr
