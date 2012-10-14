@@ -17,11 +17,7 @@
             ' Free time
           |you can:
       h3 Go on, get started
-      =form_tag(controller: "sessions", action: "login") do
-        br
-        =text_field_tag("Name", nil, placeholder: "Enter group name")
-        .form-actions
-          =submit_tag("Submit", class: 'btn btn-primary')
+      = render partial: 'groups/form'
 .selling-points
   .container
     .row-fluid

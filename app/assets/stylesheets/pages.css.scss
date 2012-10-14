@@ -22,6 +22,9 @@ span.freetime-blue{
   padding-top:20px;
   background-color: #fff;
   padding: 1.5em 2em 1.5em 2em;
+  form {
+    .slot_size{ display: none; }
+  }
 }
 
 .selling-points{
