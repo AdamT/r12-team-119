@@ -6,6 +6,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui-1.9.0.custom.min
 //= require underscore
 //= require backbone
 //= require backbone_rails_sync

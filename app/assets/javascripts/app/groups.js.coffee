@@ -4,3 +4,6 @@
 #
 view = new DtimeRumble.Views.Calendar(el: $('.calendar'))
 
+$(".date_picker").datepicker
+  dateFormat: "yy-mm-dd"
+
