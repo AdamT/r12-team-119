@@ -41,18 +41,43 @@
 
 
 
-      &.masked td.valid{
-        border: 1px solid blue;
+      // Groups
+      td{
+        background: white;
+        &.highlighted.valid{
+          background: rgba(0,190,80,0.35);
+        }
+        &.day_6, &.day_0{
+          background: rgba(0,0,0,0.11);
+        }
+        &.day_6.valid, &.day_0.valid{
+          background: rgba(0,90,40,0.15);
+        }
+        &.highlighted.day_6, &.highlighted.day_0{
+          background: rgba(0,190,80,0.45);
+        }
       }
 
-      td.highlighted{
-        html.touch &{
-          background: blue;
+      // User timecards
+      &.masked{
+        td{
+          background: rgba(0,0,0,0.05);
+          &.valid{
+            background: rgba(0,190,80,0.05);
+          }
+          &.highlighted.valid{
+            background: rgba(0,80,190,0.45);
+          }
+          &.day_6, &.day_0{
+            background: rgba(0,0,0,0.11);
+          }
+          &.day_6.valid, &.day_0.valid{
+            background: rgba(0,190,80,0.15);
+          }
+          &.highlighted.day_6, &.highlighted.day_0{
+            background: rgba(0,80,190,0.55);
+          }
         }
-        background: rgba(100,100,155,0.25);
-      }
-      .day_6,.day_0{
-        background: rgba(0,0,0,0.11);
       }
 
       td{
