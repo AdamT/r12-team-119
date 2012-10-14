@@ -22,7 +22,6 @@ class SessionsController < ApplicationController
       Notifications.login(user).deliver
       redirect_to waiting_path
     else
-      params[:user][:name] = "Random Person" unless params[:user][:name]
       user = User.new(params[:user])
       if user.save
         handle_waiting_for(user)

@@ -18,9 +18,10 @@ class Timecard
   end
 
   def build_group_card(cards_set = {})
-    each_day.each_with_index do |day, d|
+    my_clone = clone_blank
+    my_clone.each_day.each_with_index do |day, d|
       each_slot.each_with_index do |s, i|
-        next unless s
+        next unless self.fetch(d, i)
         cards_set.each do |user, card|
           if card.fetch(d, i)
             day[i] = [] unless day[i].respond_to?(:<<)
@@ -30,7 +31,7 @@ class Timecard
         day[i] = true if day[i].blank?
       end
     end
-    self
+    my_clone
   end
 
   def each_slot(&block)
@@ -80,7 +81,7 @@ class Timecard
     params.each do |day, slots|
       slots.each do |slot_num, bool|
         if bool.is_a?(String)
-          bool = (bool == "true")
+          bool = (bool === "true")
         end
         @day_list[day.to_i].slots[slot_num.to_i] = bool
       end

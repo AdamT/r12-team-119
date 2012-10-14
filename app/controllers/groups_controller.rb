@@ -9,11 +9,7 @@ class GroupsController < ApplicationController
   end
 
   def show
-
-    cards = @group.valid_group_participants
-    cards = cards.reject{|u| u.user_id == current_user.id} if logged_in?
-    cards_list = cards.each_with_object({}){|c, hash| hash[c.user] = c.timecard }
-    @group_timecard = @group.timecard.build_group_card(cards_list)
+    @group_timecard = build_group_timecard
     if logged_in?
       unless @me = current_user.responses.detect{|r| r.group_id == @group.id}
         @me = GroupParticipant.new(group_id: @group.id)
@@ -24,7 +20,16 @@ class GroupsController < ApplicationController
     end
   end
 
+  def build_group_timecard
+    return @group.timecard.clone_blank unless @group.valid?
+    cards = @group.valid_group_participants
+    cards = cards.reject{|u| u.user_id == current_user.id} if logged_in?
+    cards_list = cards.each_with_object({}){|c, hash| hash[c.user] = c.timecard }
+    @group.timecard.build_group_card(cards_list)
+  end
+
   def edit
+    @group_timecard = @group.timecard
     if logged_in?
       if current_user.id != @group.user_id
         redirect_to group_path(@group)
