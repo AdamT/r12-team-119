@@ -30,12 +30,8 @@ body
     == yield
     = javascript_include_tag "application"
   footer
-    .container
-      .row
-        .span4
-        .span4
-          .spacer
-            ' made with
-            =image_tag(src="glyphicons/glyphicons_012_heart.png")
-            |   in NYC and SLC
-        .span4
+    .row
+      .spacer
+        ' made with
+        =image_tag(src="glyphicons/glyphicons_012_heart.png")
+        |   in NYC and SLC
