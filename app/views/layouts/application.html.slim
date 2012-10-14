@@ -29,7 +29,3 @@ body
   div(class="#{@on_splash ? 'splash landing' : 'container'}")
     == yield
     = javascript_include_tag "application"
-  - if Rails.env.development?
-    .container.debug
-      = link_to "Sent Mail", "/mail"
-
