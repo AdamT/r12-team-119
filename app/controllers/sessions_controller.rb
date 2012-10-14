@@ -7,7 +7,11 @@ class SessionsController < ApplicationController
     elsif logged_in?
       redirect_to root_path
     else
+      group_waiting = nil
+      group_waiting = Group.find(session[:group_waiting]) if session[:group_waiting]
       flash.now[:notice] = "That token seems to have expired" if params[:token]
+      flash.now[:notice] = "We'll need to confirm your email to save your changes" if session[:participant_waiting]
+      flash.now[:notice] = "One last thing... we'll need you to log in you'll want to make changes (<a href='#{group_path(group_waiting)}'>skip</a>)".html_safe if group_waiting
       render :login
     end
   end
