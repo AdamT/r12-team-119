@@ -1,10 +1,15 @@
-h1 Groups#show
-p Find me in app/views/groups/show.html.slim
+.view-group
+  - if @group.owned_by?(current_user)
+    a.edit.btn.btn-secondary(href=edit_group_path(@group)) Edit
 
-- if @group.owned_by?(current_user)
-  a.btn.btn-primary(href=edit_group_path(@group)) Edit
+  h1= @group.title
+  - if @group.valid_group_participants.size > 0
+    p
+      ' Participants:
+      = @group.valid_group_participants.map{|p| p.user.display_name }.join(", ")
 
-= form_tag(set_user_group_path(@group), method: 'post', class: 'user cal') do
-  = render partial: 'timecard', locals: {masking_timecard: @group.timecard, timecard: @timecard}
-  .form-actions
-    = submit_tag("Save", class: "btn btn-primary")
+  = form_tag(set_user_group_path(@group), method: 'post', class: 'user cal') do
+    .form-actions
+      p Choose the times you are available
+      = submit_tag("Save", class: "btn btn-primary disabled")
+    = render partial: 'timecard', locals: {masking_timecard: @group.timecard, timecard: @timecard}

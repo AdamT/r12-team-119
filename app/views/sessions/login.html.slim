@@ -1,6 +1,7 @@
 #login
   =form_tag({:action => "login"}, {:class => "form-vertical span5 offset2"}) do
-    =field_set_tag "We'll need your email first..." do
+    - my_title = "Please type your email address..."
+    =field_set_tag my_title do
       .control-group
         .controls
           .gravatar

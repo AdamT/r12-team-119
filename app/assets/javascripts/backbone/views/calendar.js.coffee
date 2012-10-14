@@ -66,6 +66,7 @@ class DtimeRumble.Views.Calendar extends Backbone.View
     $('input.check', target).change()
 
   highlightThis: (e)->
+    @$el.closest('.view-group,.edit-group').find(".form-actions .btn").removeClass("disabled")
     target = $(e.target)
     if target.is(":checked")
       target.closest('td').addClass("highlighted")

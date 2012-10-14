@@ -66,6 +66,10 @@ header{
     margin: 0 auto;
     padding: 10px;
     width: 940px;
+    a{
+      color: white;
+      text-decoration: underline;
+    }
   }
 
   .user{
@@ -101,6 +105,12 @@ header{
   border-top: 6px solid #336699;
   background: white;
   padding: 60px;
+
+  width: 90%;
+  max-width: 960px;
+  .touch & {
+    max-width: 800px;
+  }
 }
 
 /*.splash body{*/
